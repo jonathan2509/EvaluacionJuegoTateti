@@ -3,43 +3,33 @@
 
 import random
 
-CELLS = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
-TURN = {0: 'La computadora va', 1: 'Vas'}
+TURNO = {0: 'La computadora va', 1: 'Vas'}
+CELDAS = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
 
-def printTable(table):
-    """
-        Descripción: Función que dibuja una tabla con los valores seleccionados tanto
-                     por el usuario como por la computadora.
-        Parámetros:
-            1 - table: Contiene una lista con los valores seleccionados. Por defecto es
-                       una lista de 10 elementos con un espacio como valor.
+def dibujarTabla(tabla):
+    """ Esta función dibuja una tabla con los valores seleccionados por el usuario 
+    y por la computadora.
+    Contiene una lista con los valores seleccionados, por default es una lisa de 
+    diez elemenos con un espacio como valor.
     """
     opEmptyRow = ' ' * 7
     emptyRow = ' ' * 8
-    print '1' + opEmptyRow + '*2' + opEmptyRow + '*3' + opEmptyRow
-    print '    ' + table[1] + '   *    ' + table[2] + '   *    ' + table[3] + '    '
+    print '7' + opEmptyRow + '*8' + opEmptyRow + '*9' + opEmptyRow
+    print '    ' + tabla[7] + '   *    ' + tabla[8] + '   *    ' + tabla[9] + '    '
     print emptyRow + '*' + emptyRow + '*' + emptyRow
     print '********+********+********'
     print '4' + opEmptyRow + '*5' + opEmptyRow + '*6' + opEmptyRow
-    print '    ' + table[4] + '   *    ' + table[5] + '   *    ' + table[6] + '    '
+    print '    ' + tabla[4] + '   *    ' + tabla[5] + '   *    ' + tabla[6] + '    '
     print emptyRow + '*' + emptyRow + '*' + emptyRow
     print '********+********+********'
-    print '7' + opEmptyRow + '*8' + opEmptyRow + '*9' + opEmptyRow
-    print '    ' + table[7] + '   *    ' + table[8] + '   *    ' + table[9] + '    '
+    print '1' + opEmptyRow + '*2' + opEmptyRow + '*3' + opEmptyRow
+    print '    ' + tabla[1] + '   *    ' + tabla[2] + '   *    ' + tabla[3] + '    '
     print emptyRow + '*' + emptyRow + '*' + emptyRow
 
 def SeleccionarLetraJugador():
     """
         Le da la opcion al jugador de elegir que desea ser.
         Esta lista contiene dos elementos, en primer lugar la letra del jugador y en segundo la de computadora.
-    """
-
-    """
-        Descripción: Función que brinda al jugador la posibilidad de seleccionar la letra
-                     que desea ser.
-        Retorna:
-            1 - Una lista que contiene dos elementos. El primero la letra del jugador y el
-                segundo la letra de la computadora.
     """
     letra = ''
     while not (letra == 'X' or letra == 'O'):
@@ -50,7 +40,7 @@ def SeleccionarLetraJugador():
     else: 
     	return ['O', 'X']
 
-def randomStart():
+def inicioAleatorio():
     return random.randint(0, 1)
 
 def JugarDeNuevo():
@@ -61,157 +51,140 @@ def JugarDeNuevo():
     print '¿Quieres jugar de nuevo? (sí/no)?'
     return raw_input().lower().startswith('s')
 
-def makeMove(table, letra, move):
-    table[move] = letra
+def hacerMovimiento(tabla, letra, move):
+    tabla[move] = letra
 
-def esGanador(table, letra):
+def esGanador(tabla, letra):
+    """ Aqui se hace la verificación si ganó, dado los valores de la tabla
+    y una letra. Devuelve verdadero si se da alguna de estas combinaciones.
+    Sino False.
     """
-        Descripción: Dados los valores de la tabla y una letra, verifica si ganó o no.
-        Retorna:
-            1 - True si ganó con alguna de las posibles combinaciones, en caso contrario False.
-    """
-    hTop = (table[7] == letra and table[8] == letra and table[9] == letra) # Horizontal superior.
-    hMiddle = (table[4] == letra and table[5] == letra and table[6] == letra) # Horizontal medio.
-    hBottom = (table[1] == letra and table[2] == letra and table[3] == letra) # Horizontal inferior.
-    vLeft = (table[7] == letra and table[4] == letra and table[1] == letra) # Vertical izquierda.
-    vCenter = (table[8] == letra and table[5] == letra and table[2] == letra) # Vertical centro.
-    vRight = (table[9] == letra and table[6] == letra and table[3] == letra) # Vertical derecha.
-    xTopDiagonal = (table[9] == letra and table[5] == letra and table[1] == letra) # Diagonal superior izquierda
-    xBottomDiagonal = (table[7] == letra and table[5] == letra and table[3] == letra) # Diagonal inferior izquierda
+    hTop = (tabla[7] == letra and tabla[8] == letra and tabla[9] == letra) # Horizontal superior.
+    hMiddle = (tabla[4] == letra and tabla[5] == letra and tabla[6] == letra) # Horizontal medio.
+    hBottom = (tabla[1] == letra and tabla[2] == letra and tabla[3] == letra) # Horizontal inferior.
+    vLeft = (tabla[7] == letra and tabla[4] == letra and tabla[1] == letra) # Vertical izquierda.
+    vCenter = (tabla[8] == letra and tabla[5] == letra and tabla[2] == letra) # Vertical centro.
+    vRight = (tabla[9] == letra and tabla[6] == letra and tabla[3] == letra) # Vertical derecha.
+    xTopDiagonal = (tabla[9] == letra and tabla[5] == letra and tabla[1] == letra) # Diagonal superior izquierda
+    xBottomDiagonal = (tabla[7] == letra and tabla[5] == letra and tabla[3] == letra) # Diagonal inferior izquierda
     return (hTop or hMiddle or hBottom or vLeft or vCenter or vRight or xTopDiagonal or xBottomDiagonal)
 
-def duplicateTable(table):
+def tablaDuplicada(tabla):
+    """Duplica la tabla original y devuelve el duplicado de la lista original.
     """
-        Descripción: Duplica la tabla original.
-        Retorna:
-            1 - Duplicado de la lista original.
-    """
-    return [cell for cell in table]
+    return [celda for celda in tabla]
 
-def hasFreeSpace(table, move):
+def espacioLibre(tabla, move):
+    """Evalúa si la celda esta disponible, devuelve true en caso de que haya espacio.
+    Sino false.
     """
-        Descripción: Función que evalúa si la celda está disponible o no.
-        Retorna:
-            1 - True en el caso de que haya espacio y False en caso contrario.
-    """
-    return table[move] == ' '
+    return tabla[move] == ' '
 
-def getPlayerMove(table):
-    """
-        Descripción: Permite al jugador ingresar su jugada.
-        Retorna:
-            1 - El siguiente movimiento del jugador.
+def movimientoJugador(tabla):
+    """Permite al jugador ingresar su jugada, esta devuelve el siguiente moviento 
+    del jugador.
     """
     move = ' '
     while True:
         print '¿Cuál es tu próxima jugada? (1-9)'
         move = raw_input()
-        if move not in CELLS or not hasFreeSpace(table, int(move)):
+        if move not in CELDAS or not espacioLibre(tabla, int(move)):
             move = ' '
-            print("¡Elegí una opción válida!")
+            print "Tienes que elegir una opción válida!!"
         else:
             break
     return int(move)
 
-def selectRandom(table, plays):
+def seleccionAleatoria(tabla, plays):
+    """Selecciona una jugada aleatoria, de una lista de jugadas. Si el espacio 
+    esta disponible, se agrega a la lista de posibilidades.
+    Si hay alguna posibilidad la devuelve, caso contrario no.
     """
-        Descripción: Selecciona una jugada al azar de una lista de jugadas recibida.
-                     Si el espacio se encuentra libre, lo agrega a la lista de
-                     posibilidades.
-        Retorna:
-            1 - Si hay posibilidades, una jugada al azar, en caso contrario, None.
-    """
-    possibilities = [i for i in plays if hasFreeSpace(table, i)]
+    possibilities = [i for i in plays if espacioLibre(tabla, i)]
     if len(possibilities):
         return random.choice(possibilities)
     return None
 
-def canWin(table, letra):
+def posibilidadWinner(tabla, letra):
+    """Este metodo predice el próximo movimiento correcto.
+    Devuelve el siguiente movimiento, el ganador o el que bloquea.  
     """
-        Descripción: Predice el siguiente movimiento correcto.
-        Retorna:
-            1 - El siguiente movimiento que permitirá ganar o bloquear dependiendo de su uso.
-    """
-    cell = 0
+    celda = 0
     for i in range(1, 10):
-        copyTable = duplicateTable(table)
-        if hasFreeSpace(copyTable, i):
-            makeMove(copyTable, letra, i)
-            if esGanador(copyTable, letra):
-                cell = i
-    return cell
+        copytabla = tablaDuplicada(tabla)
+        if espacioLibre(copytabla, i):
+            hacerMovimiento(copytabla, letra, i)
+            if esGanador(copytabla, letra):
+                celda = i
+    return celda
 
-def getComputerMove(table, computerletra, playerletra):
+def movimientoComputadora(tabla, letraComputadora, letraJugador):
+    """Este metodo haceuna simulación de Inteligencia Artificial.
+    Decide los movimiento a realizar a partir de los siguientes pasos.
+    Primero, evalua si tiene la posibilidad de ganar en el siguiente paso, 
+    si esto es posible, lo hace.
+    Segundo, si el otro jugador puede ganar con el próximo moviento, lo bloquea.
+    Tercero, si algunas de las esquinas se encuentra libre, las ocupa.
+    Cuarto, evalúa si el centro se encuentra vacio para ocuparlo.
+    Quinto, evalúa si alguno de los lados se encuentra libre para ocuparlo.
+    Devuelve el singuiente movimiento de la computadora.
     """
-        Descripción: Determina la siguiente jugada de la computadora.
-                     Simula una IA (Inteligencia Artificial), la cual decide que
-                     movimiento realizar, siguiendo los siguintes pasos:
-                     1 - Evalúa si puede ganar en el siguiente movimiento, de ser posible,
-                         efectúa el movimiento.
-                     2 - Evalúa si el jugador puede ganar en el siguiente movimiento, de ser
-                         así, lo bloquea.
-                     3 - Evalúa si alguna de las esquinas se encuentra libre para ocuparla.
-                     4 - Evalúa si el centro se encuentra disponible para ocuparlo.
-                     5 - Evalúa si alguno de los lados se encuentra libre para ocuparlo.
-        Retorna:
-            1 - El siguiente movimiento de la computadora.
-    """
-    move = canWin(table, computerletra)
+    move = posibilidadWinner(tabla, letraComputadora)
     if move: return move
-    move = canWin(table, playerletra)
+    move = posibilidadWinner(tabla, letraJugador)
     if move: return move
-    move = selectRandom(table, [1, 3, 7, 9])
+    move = seleccionAleatoria(tabla, [1, 3, 7, 9])
     if move is not None: return move
-    if hasFreeSpace(table, 5): return 5
-    return selectRandom(table, [2, 4, 6, 8])
+    if espacioLibre(tabla, 5): return 5
+    return seleccionAleatoria(tabla, [2, 4, 6, 8])
 
-def fullTable(table):
+def tablaCompleta(tabla):
     """
         Descripción: Evalúa si la tabla fue completada o no.
         Retorna:
             1 - True en caso de que esté completa, en caso de que haya al menos una celda
                 vacía retorna False.
     """
-    auxTable = list()
-    for i, cell in enumerate(table):
+    auxtabla = list()
+    for i, celda in enumerate(tabla):
         if not i:
             continue
-        auxTable.append(cell)
-    return all(cell in ['X', 'O'] for cell in auxTable)
+        auxtabla.append(celda)
+    return all(celda in ['X', 'O'] for celda in auxtabla)
 
-def finishPlay(table, playInProgress, message):
-    printTable(table)
+def finJuego(tabla, juegoEnCurso, message):
+    dibujarTabla(tabla)
     print message
-    playInProgress = False
-    return playInProgress
+    juegoEnCurso = False
+    return juegoEnCurso
 
 print 'Inciando Juego Ta-Te-Ti'
-play = True
-while play:
-    playerletra, computerletra = SeleccionarLetraJugador()
-    turn = randomStart()
-    print TURN.get(turn) + ' primero.'
-    playInProgress = True
-    table = [' '] * 10
-    while playInProgress:
-        if turn:
-            # Turno del jugador
-            printTable(table)
-            move = getPlayerMove(table)
-            makeMove(table, playerletra, move)
-            if esGanador(table, playerletra):
-                playInProgress = finishPlay(table, playInProgress, 'Eres el Ganador!')
-            elif fullTable(table):
-                playInProgress = finishPlay(table, playInProgress, 'El juego termina en empate...')
-            turn = 0
+jugar = True
+while jugar:
+    letraJugador, letraComputadora = SeleccionarLetraJugador()
+    turno = inicioAleatorio()
+    print TURNO.get(turno) + ' primero.'
+    juegoEnCurso = True
+    tabla = [' '] * 10
+    while juegoEnCurso:
+        if turno:
+            ###Turno del jugador
+            dibujarTabla(tabla)
+            move = movimientoJugador(tabla)
+            hacerMovimiento(tabla, letraJugador, move)
+            if esGanador(tabla, letraJugador):
+                juegoEnCurso = finJuego(tabla, juegoEnCurso, 'Eres el Ganador!!')
+            elif tablaCompleta(tabla):
+                juegoEnCurso = finJuego(tabla, juegoEnCurso, 'El juego termina en empate...')
+            turno = 0
         else:
-            # Turno de la computadora
-            move = getComputerMove(table, computerletra, playerletra)
-            makeMove(table, computerletra, move)
-            if esGanador(table, computerletra):
-                playInProgress = finishPlay(table, playInProgress, 'La computadora te ha Ganado!!')
-            elif fullTable(table):
-                playInProgress = finishPlay(table, playInProgress, 'El juego termina en empate...')
-            turn = 1
+            ###Turno de la computadora
+            move = movimientoComputadora(tabla, letraComputadora, letraJugador)
+            hacerMovimiento(tabla, letraComputadora, move)
+            if esGanador(tabla, letraComputadora):
+                juegoEnCurso = finJuego(tabla, juegoEnCurso, 'La computadora te ha Ganado!!')
+            elif tablaCompleta(tabla):
+                juegoEnCurso = finJuego(tabla, juegoEnCurso, 'El juego termina en empate...')
+            turno = 1
     if not JugarDeNuevo():
-        play = False
+        jugar = False
