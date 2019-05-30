@@ -10,3 +10,8 @@ En esta versión del juego, las reglas no cambian, sino el entorno y contra quie
 1- Una vez leído el archivo "requerimientos" procedemos a descargar el archivo tateti.py.<br/>
 2- Luego nos ubicamos en la carpeta donde se encuentra el archivo y abrimos
    una terminal donde ponemos lo siguiente: python tateti.py
+
+### Desafios
+La evaluación me pareció  muy interesante. Fue desafiante tener que lograr que la computadora 
+sea mi rival y tener que pasarle instrucciones del juego para que ella logre ganar y/o no me lo 
+permita a mi. Nunca había hecho algo similar, así que para mi fue una evaluación muy innovadora. 
