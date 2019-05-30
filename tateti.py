@@ -14,17 +14,17 @@ def dibujarTabla(tabla):
     """
     opEmptyRow = ' ' * 7
     emptyRow = ' ' * 8
-    print '7' + opEmptyRow + '*8' + opEmptyRow + '*9' + opEmptyRow
-    print '    ' + tabla[7] + '   *    ' + tabla[8] + '   *    ' + tabla[9] + '    '
-    print emptyRow + '*' + emptyRow + '*' + emptyRow
-    print '********+********+********'
-    print '4' + opEmptyRow + '*5' + opEmptyRow + '*6' + opEmptyRow
-    print '    ' + tabla[4] + '   *    ' + tabla[5] + '   *    ' + tabla[6] + '    '
-    print emptyRow + '*' + emptyRow + '*' + emptyRow
-    print '********+********+********'
-    print '1' + opEmptyRow + '*2' + opEmptyRow + '*3' + opEmptyRow
-    print '    ' + tabla[1] + '   *    ' + tabla[2] + '   *    ' + tabla[3] + '    '
-    print emptyRow + '*' + emptyRow + '*' + emptyRow
+    print('7' + opEmptyRow + '*8' + opEmptyRow + '*9' + opEmptyRow)
+    print('    ' + tabla[7] + '   *    ' + tabla[8] + '   *    ' + tabla[9] + '    ')
+    print(emptyRow + '*' + emptyRow + '*' + emptyRow)
+    print('********+********+********')
+    print('4' + opEmptyRow + '*5' + opEmptyRow + '*6' + opEmptyRow)
+    print('    ' + tabla[4] + '   *    ' + tabla[5] + '   *    ' + tabla[6] + '    ')
+    print(emptyRow + '*' + emptyRow + '*' + emptyRow)
+    print('********+********+********')
+    print('1' + opEmptyRow + '*2' + opEmptyRow + '*3' + opEmptyRow)
+    print('    ' + tabla[1] + '   *    ' + tabla[2] + '   *    ' + tabla[3] + '    ')
+    print(emptyRow + '*' + emptyRow + '*' + emptyRow)
 
 def SeleccionarLetraJugador():
     """
@@ -33,8 +33,8 @@ def SeleccionarLetraJugador():
     """
     letra = ''
     while not (letra == 'X' or letra == 'O'):
-        print '¿Deseas ser X o O?'
-        letra = raw_input().upper()
+        print('¿Deseas ser X o O?')
+        letra = input().upper()
     if letra == 'X':
     	return ['X', 'O']
     else: 
@@ -48,8 +48,8 @@ def JugarDeNuevo():
    	   Devuelve True en caso del que el  jugador haya seleccionado "S" o "SI" y False
    	   en caso de selccionar cualquier otra letra.
     """
-    print '¿Quieres jugar de nuevo? (sí/no)?'
-    return raw_input().lower().startswith('s')
+    print('¿Quieres jugar de nuevo? (sí/no)?')
+    return input().lower().startswith('s')
 
 def hacerMovimiento(tabla, letra, move):
     tabla[move] = letra
@@ -86,11 +86,11 @@ def movimientoJugador(tabla):
     """
     move = ' '
     while True:
-        print '¿Cuál es tu próxima jugada? (1-9)'
-        move = raw_input()
+        print('¿Cuál es tu próxima jugada? (1-9)')
+        move = input()
         if move not in CELDAS or not espacioLibre(tabla, int(move)):
             move = ' '
-            print "Tienes que elegir una opción válida!!"
+            print("Tienes que elegir una opción válida!!")
         else:
             break
     return int(move)
@@ -154,16 +154,16 @@ def tablaCompleta(tabla):
 
 def finJuego(tabla, juegoEnCurso, message):
     dibujarTabla(tabla)
-    print message
+    print(message)
     juegoEnCurso = False
     return juegoEnCurso
 
-print 'Inciando Juego Ta-Te-Ti'
+print('Inciando Juego Ta-Te-Ti')
 jugar = True
 while jugar:
     letraJugador, letraComputadora = SeleccionarLetraJugador()
     turno = inicioAleatorio()
-    print TURNO.get(turno) + ' primero.'
+    print(TURNO.get(turno) + ' primero.')
     juegoEnCurso = True
     tabla = [' '] * 10
     while juegoEnCurso:
@@ -188,3 +188,4 @@ while jugar:
             turno = 1
     if not JugarDeNuevo():
         jugar = False
+
