@@ -1,1 +1,8 @@
-#Requerimientos
+###Requerimientos###
+
+Para poder ejecutar el juego es necesario tener instalado Python 3.x.
+
+El juego utiliza librerias que ya vienen instaladas
+con el paquete de Python.
+
+Una vez instalado Python 3, ya podemos descargar el archivo "tateti.py".
